@@ -130,6 +130,17 @@ button{font-family:inherit;cursor:pointer;}
   color:var(--text-mid);
   text-align:center;
 }
+.intro-inner p strong{
+  color:var(--text-dark);
+  font-weight:800;
+}
+.intro-short{
+  min-height:auto;
+  padding:32px 24px;
+}
+.intro-short .intro-inner p{
+  font-size:19px;
+}
 
 /* Donate box */
 .donate-box{
@@ -161,10 +172,10 @@ button{font-family:inherit;cursor:pointer;}
   font-size:17px;
   transition:all .2s ease;
 }
-.amount-btn:hover{border-color:var(--accent);}
+.amount-btn:hover{border-color:#1565c0;}
 .amount-btn.selected{
-  background:var(--accent);
-  border-color:var(--accent);
+  background:#1565c0;
+  border-color:#1565c0;
   color:#fff;
 }
 
@@ -426,9 +437,9 @@ button{font-family:inherit;cursor:pointer;}
     </div>
   </section>
 
-  <section class="intro">
+  <section class="intro intro-short">
     <div class="intro-inner">
-      <p>A Miskolci Állatsegítő Alapítvány önkéntesei és munkatársai éjt nappallá téve dolgoznak azért, hogy a menhelyi állatoknak második esélyt adjanak. Mindez azonban egyre nagyobb terhet jelent, és a nyári hónapokban a helyzet különösen súlyossá válik. Adományoddal közvetlenül hozzájárulsz ahhoz, hogy minden befogadott kutya és macska kapjon élelmet, gyógyellátást és szeretetteljes gondoskodást, amíg új otthonra talál. Akár egyszeri, akár rendszeres támogatással segítesz, minden forint számít – együtt át tudjuk segíteni állatainkat ezen a nehéz időszakon!</p>
+      <p>Akár egyszeri, akár rendszeres támogatással segítesz, minden forint számít – együtt át tudjuk segíteni állatainkat ezen a nehéz időszakon!</p>
     </div>
   </section>
 
@@ -450,6 +461,12 @@ button{font-family:inherit;cursor:pointer;}
       </div>
 
       <button class="cta-btn" id="supportBtn">TÁMOGATOM</button>
+    </div>
+  </section>
+
+  <section class="intro">
+    <div class="intro-inner">
+      <p>A Miskolci Állatsegítő Alapítvány önkéntesei és munkatársai éjt nappallá téve dolgoznak azért, hogy a menhelyi állatoknak <strong>második esélyt</strong> adjanak. Mindez azonban <strong>egyre nagyobb terhet</strong> jelent, és a nyári hónapokban a helyzet különösen súlyossá válik. Adományoddal közvetlenül hozzájárulsz ahhoz, hogy minden befogadott kutya és macska kapjon <strong>élelmet, gyógyellátást és szeretetteljes gondoskodást</strong>, amíg új otthonra talál.</p>
     </div>
   </section>
 </main>

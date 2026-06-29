@@ -121,6 +121,17 @@ button{font-family:inherit;cursor:pointer;}
   color:var(--text-mid);
   text-align:center;
 }
+.intro-inner p strong{
+  color:var(--text-dark);
+  font-weight:800;
+}
+.intro-short{
+  min-height:auto;
+  padding:32px 24px;
+}
+.intro-short .intro-inner p{
+  font-size:19px;
+}
 
 /* Donate box */
 .donate-box{
@@ -152,10 +163,10 @@ button{font-family:inherit;cursor:pointer;}
   font-size:17px;
   transition:all .2s ease;
 }
-.amount-btn:hover{border-color:var(--accent);}
+.amount-btn:hover{border-color:#1565c0;}
 .amount-btn.selected{
-  background:var(--accent);
-  border-color:var(--accent);
+  background:#1565c0;
+  border-color:#1565c0;
   color:#fff;
 }
 
