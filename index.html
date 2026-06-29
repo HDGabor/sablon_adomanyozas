@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Éheznek az állatok! – Miskolci Állatsegítő Alapítvány</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="https://allatsegito.hu/" class="logo-link" aria-label="Miskolci Állatsegítő Alapítvány főoldal">
+      <img src="images/logo.png" alt="Miskolci Állatsegítő Alapítvány" class="logo" onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>Miskolci Állatsegítő Alapítvány</span>'">
+    </a>
+    <nav class="main-nav">
+      <a href="#" class="nav-link">Bejelentkezés</a>
+    </nav>
+  </div>
+</header>
+
+<main id="page-landing">
+  <section class="hero">
+    <div class="hero-image">
+      <img src="images/hero.jpg" alt="Rácsok mögött könyörgő kutya" onerror="this.parentElement.classList.add('hero-image-fallback'); this.remove()">
+    </div>
+    <div class="hero-content">
+      <h1>Éheznek az állatok!</h1>
+      <p>Fogytán vannak forrásaink, és egyre több négylábút kell ellátnunk menhelyünkön. 5.000.000 Ft-ot kell összegyűjtenünk, hogy túléljék a nyarat. Ugye, segítesz?</p>
+    </div>
+  </section>
+
+  <section class="intro">
+    <div class="intro-inner">
+      <p>A Miskolci Állatsegítő Alapítvány önkéntesei és munkatársai éjt nappallá téve dolgoznak azért, hogy a menhelyi állatoknak második esélyt adjanak. Mindez azonban egyre nagyobb terhet jelent, és a nyári hónapokban a helyzet különösen súlyossá válik. Adományoddal közvetlenül hozzájárulsz ahhoz, hogy minden befogadott kutya és macska kapjon élelmet, gyógyellátást és szeretetteljes gondoskodást, amíg új otthonra talál. Akár egyszeri, akár rendszeres támogatással segítesz, minden forint számít – együtt át tudjuk segíteni állatainkat ezen a nehéz időszakon!</p>
+    </div>
+  </section>
+
+  <section class="donate-box">
+    <div class="donate-inner">
+      <div class="amount-row">
+        <button class="amount-btn" data-amount="3000">3000 Ft</button>
+        <button class="amount-btn" data-amount="5000">5000 Ft</button>
+        <button class="amount-btn selected" data-amount="10000">10 000 Ft</button>
+        <button class="amount-btn" data-amount="custom">Egyéb</button>
+      </div>
+      <div class="custom-amount-wrap" id="customAmountWrap" hidden>
+        <input type="number" id="customAmount" min="1" placeholder="Add meg az összeget (Ft)">
+      </div>
+
+      <div class="frequency-row">
+        <button class="freq-btn" data-freq="eseti">ESETI TÁMOGATÁS</button>
+        <button class="freq-btn selected" data-freq="rendszeres">RENDSZERES TÁMOGATÁS</button>
+      </div>
+
+      <button class="cta-btn" id="supportBtn">TÁMOGATOM</button>
+    </div>
+  </section>
+</main>
+
+<main id="page-checkout" hidden>
+  <section class="checkout">
+    <div class="checkout-inner">
+      <p class="checkout-project">Adományoddal a következő projektet támogatod: <strong id="projectTitle">Éheznek az állatok!</strong></p>
+
+      <h2 class="section-title">Milyen módon szeretnél adományozni?</h2>
+      <div class="payment-row">
+        <button class="payment-btn selected" data-method="bankkartya">Bankkártya</button>
+        <button class="payment-btn" data-method="utalas">Utalás</button>
+      </div>
+
+      <form id="donationForm">
+        <div class="form-row two-col">
+          <div class="form-field">
+            <label for="freqSelect">Fizetés gyakorisága</label>
+            <select id="freqSelect">
+              <option value="eseti">Eseti támogatás</option>
+              <option value="rendszeres">Rendszeres támogatás</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="amountSelect">Összeg</label>
+            <select id="amountSelect">
+              <option value="3000">3000 Ft</option>
+              <option value="5000">5000 Ft</option>
+              <option value="10000">10 000 Ft</option>
+              <option value="custom">Egyéb</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row" id="checkoutCustomAmountWrap" hidden>
+          <div class="form-field">
+            <label for="checkoutCustomAmount">Add meg az összeget (Ft)</label>
+            <input type="number" id="checkoutCustomAmount" min="1">
+          </div>
+        </div>
+
+        <div class="form-row two-col">
+          <div class="form-field">
+            <label for="lastName">Vezetéknév *</label>
+            <input type="text" id="lastName" required>
+          </div>
+          <div class="form-field">
+            <label for="firstName">Keresztnév *</label>
+            <input type="text" id="firstName" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="email">E-mail cím *</label>
+            <input type="email" id="email" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <span class="field-label">Vállalatként szeretnél támogatni?</span>
+            <div class="toggle-row">
+              <button type="button" class="toggle-btn" data-company="igen">Igen</button>
+              <button type="button" class="toggle-btn selected" data-company="nem">Nem</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row two-col" id="companyFields" hidden>
+          <div class="form-field">
+            <label for="companyName">Cégnév *</label>
+            <input type="text" id="companyName">
+          </div>
+          <div class="form-field">
+            <label for="taxNumber">Adószám *</label>
+            <input type="text" id="taxNumber">
+          </div>
+        </div>
+
+        <h3 class="section-subtitle">Nem kötelező, de a kapcsolattartást megkönnyítő adatok</h3>
+
+        <div class="form-row two-col">
+          <div class="form-field">
+            <label for="zip">Irányítószám</label>
+            <input type="text" id="zip">
+          </div>
+          <div class="form-field">
+            <label for="city">Település</label>
+            <input type="text" id="city">
+          </div>
+        </div>
+        <div class="form-row two-col">
+          <div class="form-field">
+            <label for="street">Utca/házszám</label>
+            <input type="text" id="street">
+          </div>
+          <div class="form-field">
+            <label for="phone">Telefonszám</label>
+            <input type="tel" id="phone">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="privacyConsent" required>
+            Az <a href="https://allatsegito.hu/assets/adatkezelesi_tajekoztato_MASA.pdf" target="_blank" rel="noopener">adatkezelési nyilatkozatot</a> elfogadom *
+          </label>
+        </div>
+
+        <button type="submit" class="cta-btn submit-btn">ADOMÁNYOZÁS INDÍTÁSA</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <img src="images/logo.png" alt="Miskolci Állatsegítő Alapítvány" class="footer-logo" onerror="this.outerHTML='<span style=&quot;color:#fff;font-weight:800;&quot;>Miskolci Állatsegítő Alapítvány</span>'">
+    <div class="footer-contact">
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/></svg>
+        <span>+36 30 232-1890</span>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg>
+        <span>miskolciallatsegitoalapitvany@gmail.com</span>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span>Adószámunk: 18435249-2-05</span>
+      <span>Minden jog fenntartva: MÁSA, 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
