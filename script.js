@@ -142,21 +142,108 @@
   const companyFields = document.getElementById('companyFields');
   const companyName = document.getElementById('companyName');
   const taxNumber = document.getElementById('taxNumber');
+  let isCompanyState = false;
   companyBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       companyBtns.forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
-      const isCompany = btn.dataset.company === 'igen';
-      companyFields.hidden = !isCompany;
-      companyName.required = isCompany;
-      taxNumber.required = isCompany;
+      isCompanyState = btn.dataset.company === 'igen';
+      companyFields.hidden = !isCompanyState;
+      companyName.required = isCompanyState;
+      taxNumber.required = isCompanyState;
     });
   });
 
   // Form submit
-  document.getElementById('donationForm').addEventListener('submit', (e) => {
+  const donationForm = document.getElementById('donationForm');
+  const formError = document.getElementById('formError');
+  const formSubmitBtn = document.getElementById('formSubmitBtn');
+  const donationSuccess = document.getElementById('donationSuccess');
+
+  donationForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    // Adományozás indítása logikája később kerül kifejtésre
-    alert('Adományozás indítása – a fizetési folyamat hamarosan elérhető lesz.');
+    formError.hidden = true;
+
+    const amount = state.amount === 'custom' ? Number(state.customAmount) : state.amount;
+    const payload = {
+      amount,
+      frequency: state.frequency,
+      paymentMethod: state.paymentMethod,
+      lastName: document.getElementById('lastName').value,
+      firstName: document.getElementById('firstName').value,
+      email: document.getElementById('email').value,
+      isCompany: isCompanyState,
+      companyName: companyName.value,
+      taxNumber: taxNumber.value,
+      zip: document.getElementById('zip').value,
+      city: document.getElementById('city').value,
+      street: document.getElementById('street').value,
+      phone: document.getElementById('phone').value,
+      privacyConsent: document.getElementById('privacyConsent').checked
+    };
+
+    formSubmitBtn.disabled = true;
+    try {
+      const res = await fetch('/api/donations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) {
+        formError.textContent = 'Hiba történt a jelentkezés mentése közben. Kérjük, ellenőrizd az adataidat és próbáld újra.';
+        formError.hidden = false;
+        formSubmitBtn.disabled = false;
+        return;
+      }
+
+      donationForm.hidden = true;
+      donationSuccess.hidden = false;
+    } catch (err) {
+      formError.textContent = 'Hiba történt a jelentkezés mentése közben. Kérjük, próbáld újra.';
+      formError.hidden = false;
+      formSubmitBtn.disabled = false;
+    }
   });
+
+  // Load live stats/content from the backend, replacing the hardcoded fallback in place
+  (function loadPublicContent(){
+    fetch('/api/public/content')
+      .then(res => res.ok ? res.json() : Promise.reject())
+      .then(data => {
+        const { stats, content } = data;
+
+        if (content.hero_title) document.getElementById('heroTitle').textContent = content.hero_title;
+        if (content.hero_subtitle) document.getElementById('heroSubtitle').textContent = content.hero_subtitle;
+        if (content.intro_short_text) document.getElementById('introShortText').textContent = content.intro_short_text;
+        if (content.intro_long_text) document.getElementById('introLongText').innerHTML = content.intro_long_text;
+        if (content.logo_url) {
+          const logoImg = document.getElementById('logoImg');
+          const footerLogoImg = document.getElementById('footerLogoImg');
+          if (logoImg) logoImg.src = content.logo_url;
+          if (footerLogoImg) footerLogoImg.src = content.logo_url;
+        }
+        if (content.hero_image_url) {
+          const heroImg = document.getElementById('heroImg');
+          if (heroImg) heroImg.src = content.hero_image_url;
+        }
+
+        if (stats) {
+          const fmt = n => Number(n).toLocaleString('hu-HU') + ' Ft';
+          document.getElementById('statGoal').textContent = fmt(stats.goal_amount);
+          document.getElementById('statMissing').textContent = fmt(stats.missing_amount);
+          document.getElementById('statSupporters').textContent = stats.supporter_count;
+          if (stats.deadline) {
+            const d = new Date(stats.deadline);
+            document.getElementById('statDeadline').textContent =
+              `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}.`;
+          }
+          const pct = stats.goal_amount > 0
+            ? Math.min(100, Math.max(0, ((stats.goal_amount - stats.missing_amount) / stats.goal_amount) * 100))
+            : 0;
+          document.getElementById('progressBarFill').style.width = pct + '%';
+        }
+      })
+      .catch(() => { /* keep hardcoded fallback content */ });
+  })();
 })();

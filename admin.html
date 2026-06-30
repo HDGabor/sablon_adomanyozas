@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin – Miskolci Állatsegítő Alapítvány</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="logo-fallback">Admin felület</span>
+  </div>
+</header>
+
+<main id="login-screen" class="admin-shell">
+  <div class="admin-card">
+    <h1 class="admin-title">Bejelentkezés</h1>
+    <form id="loginForm">
+      <div class="form-field">
+        <label for="adminPassword">Admin jelszó</label>
+        <input type="password" id="adminPassword" required autocomplete="current-password">
+      </div>
+      <p id="loginError" class="admin-error" hidden>Hibás jelszó.</p>
+      <button type="submit" class="cta-btn">Bejelentkezés</button>
+    </form>
+  </div>
+</main>
+
+<main id="admin-app" class="admin-shell" hidden>
+  <div class="admin-card admin-card-wide">
+    <div class="admin-tabs-header">
+      <nav class="admin-tabs">
+        <button type="button" class="admin-tab-btn selected" data-tab="stats">Statisztikák</button>
+        <button type="button" class="admin-tab-btn" data-tab="content">Tartalom</button>
+        <button type="button" class="admin-tab-btn" data-tab="donations">Jelentkezések</button>
+      </nav>
+      <button type="button" id="logoutBtn" class="payment-btn">Kijelentkezés</button>
+    </div>
+
+    <section id="tab-stats" class="admin-tab-panel">
+      <form id="statsForm">
+        <div class="form-row two-col">
+          <div class="form-field">
+            <label for="goalAmount">Gyűjtési cél (Ft)</label>
+            <input type="number" id="goalAmount" min="0" required>
+          </div>
+          <div class="form-field">
+            <label for="raisedAmount">Befolyt összeg (Ft)</label>
+            <input type="number" id="raisedAmount" min="0" required>
+          </div>
+        </div>
+        <div class="form-row two-col">
+          <div class="form-field">
+            <label for="supporterCount">Támogatók száma</label>
+            <input type="number" id="supporterCount" min="0" required>
+          </div>
+          <div class="form-field">
+            <label for="deadline">Határidő</label>
+            <input type="date" id="deadline">
+          </div>
+        </div>
+        <p class="admin-computed">Hiányzó összeg (számolt): <strong id="missingAmountPreview">–</strong></p>
+        <p id="statsSaved" class="admin-success" hidden>Mentve.</p>
+        <button type="submit" class="cta-btn">Mentés</button>
+      </form>
+    </section>
+
+    <section id="tab-content" class="admin-tab-panel" hidden>
+      <form id="contentForm">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="heroTitleInput">Főcím</label>
+            <input type="text" id="heroTitleInput">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="heroSubtitleInput">Alcím</label>
+            <textarea id="heroSubtitleInput" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="introShortInput">Rövid bevezető (a támogatás-választó alatt)</label>
+            <textarea id="introShortInput" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="introLongInput">Hosszú bevezető (a &lt;strong&gt; tag kiemelést jelent)</label>
+            <textarea id="introLongInput" rows="5"></textarea>
+          </div>
+        </div>
+        <p id="contentSaved" class="admin-success" hidden>Mentve.</p>
+        <button type="submit" class="cta-btn">Szövegek mentése</button>
+      </form>
+
+      <hr class="admin-divider">
+
+      <div class="admin-upload-row">
+        <div class="admin-upload-field">
+          <label>Logó kép</label>
+          <img id="logoPreview" class="admin-img-preview" alt="Logó előnézet">
+          <input type="file" id="logoFileInput" accept="image/png,image/jpeg,image/webp">
+          <p id="logoUploadStatus" class="admin-upload-status"></p>
+        </div>
+        <div class="admin-upload-field">
+          <label>Hero kép</label>
+          <img id="heroPreview" class="admin-img-preview" alt="Hero kép előnézet">
+          <input type="file" id="heroFileInput" accept="image/png,image/jpeg,image/webp">
+          <p id="heroUploadStatus" class="admin-upload-status"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-donations" class="admin-tab-panel" hidden>
+      <div class="admin-donations-header">
+        <button type="button" id="exportCsvBtn" class="payment-btn">Export CSV</button>
+        <span id="donationsTotal" class="admin-computed"></span>
+      </div>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Dátum</th>
+              <th>Név</th>
+              <th>Email</th>
+              <th>Összeg</th>
+              <th>Gyakoriság</th>
+              <th>Fizetés</th>
+              <th>Cég</th>
+              <th>Státusz</th>
+            </tr>
+          </thead>
+          <tbody id="donationsTableBody"></tbody>
+        </table>
+      </div>
+      <div class="admin-pagination">
+        <button type="button" id="prevPageBtn" class="payment-btn">Előző</button>
+        <span id="pageIndicator"></span>
+        <button type="button" id="nextPageBtn" class="payment-btn">Következő</button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script src="admin.js"></script>
+</body>
+</html>

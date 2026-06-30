@@ -1,0 +1,10 @@
+{
+  "name": "allatsegito-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Éheznek az állatok! donation landing page with admin backend",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
+    "formidable": "^3.5.1"
+  }
+}

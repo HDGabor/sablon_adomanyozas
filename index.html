@@ -13,7 +13,7 @@
 <header class="topbar">
   <div class="topbar-inner">
     <a href="https://allatsegito.hu/" class="logo-link" aria-label="Miskolci Állatsegítő Alapítvány főoldal">
-      <img src="images/logo.png" alt="Miskolci Állatsegítő Alapítvány" class="logo" onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>Miskolci Állatsegítő Alapítvány</span>'">
+      <img src="images/logo.png" alt="Miskolci Állatsegítő Alapítvány" class="logo" id="logoImg" onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>Miskolci Állatsegítő Alapítvány</span>'">
     </a>
     <nav class="main-nav">
       <a href="#" class="nav-link">Bejelentkezés</a>
@@ -24,17 +24,17 @@
 <main id="page-landing">
   <section class="hero">
     <div class="hero-image">
-      <img src="images/hero.jpg" alt="Rácsok mögött könyörgő kutya" onerror="this.parentElement.classList.add('hero-image-fallback'); this.remove()">
+      <img src="images/hero.jpg" alt="Rácsok mögött könyörgő kutya" id="heroImg" onerror="this.parentElement.classList.add('hero-image-fallback'); this.remove()">
     </div>
     <div class="hero-content">
-      <h1>Éheznek az állatok!</h1>
-      <p>Fogytán vannak forrásaink, és egyre több négylábút kell ellátnunk menhelyünkön. 5.000.000 Ft-ot kell összegyűjtenünk, hogy túléljék a nyarat. Ugye, segítesz?</p>
+      <h1 id="heroTitle">Éheznek az állatok!</h1>
+      <p id="heroSubtitle">Fogytán vannak forrásaink, és egyre több négylábút kell ellátnunk menhelyünkön. 5.000.000 Ft-ot kell összegyűjtenünk, hogy túléljék a nyarat. Ugye, segítesz?</p>
     </div>
   </section>
 
   <section class="intro intro-short">
     <div class="intro-inner">
-      <p>Akár egyszeri, akár rendszeres támogatással segítesz, minden forint számít – együtt át tudjuk segíteni állatainkat ezen a nehéz időszakon!</p>
+      <p id="introShortText">Akár egyszeri, akár rendszeres támogatással segítesz, minden forint számít – együtt át tudjuk segíteni állatainkat ezen a nehéz időszakon!</p>
     </div>
   </section>
 
@@ -62,23 +62,23 @@
   <section class="stats-box">
     <div class="stats-inner">
       <div class="progress-bar">
-        <div class="progress-bar-fill" style="width:31.3%"></div>
+        <div class="progress-bar-fill" id="progressBarFill" style="width:31.3%"></div>
       </div>
       <div class="stats-grid">
         <div class="stat-item">
-          <span class="stat-value">5.000.000 Ft</span>
+          <span class="stat-value" id="statGoal">5.000.000 Ft</span>
           <span class="stat-label">Gyűjtési cél</span>
         </div>
         <div class="stat-item">
-          <span class="stat-value">3.435.000 Ft</span>
+          <span class="stat-value" id="statMissing">3.435.000 Ft</span>
           <span class="stat-label">Hiányzó összeg</span>
         </div>
         <div class="stat-item">
-          <span class="stat-value">302</span>
+          <span class="stat-value" id="statSupporters">302</span>
           <span class="stat-label">Támogatók száma</span>
         </div>
         <div class="stat-item">
-          <span class="stat-value">2026.07.31.</span>
+          <span class="stat-value" id="statDeadline">2026.07.31.</span>
           <span class="stat-label">Határidő</span>
         </div>
       </div>
@@ -87,7 +87,7 @@
 
   <section class="intro">
     <div class="intro-inner">
-      <p>A Miskolci Állatsegítő Alapítvány önkéntesei és munkatársai éjt nappallá téve dolgoznak azért, hogy a menhelyi állatoknak <strong>második esélyt</strong> adjanak. Mindez azonban <strong>egyre nagyobb terhet</strong> jelent, és a nyári hónapokban a helyzet különösen súlyossá válik. Adományoddal közvetlenül hozzájárulsz ahhoz, hogy minden befogadott kutya és macska kapjon <strong>élelmet, gyógyellátást és szeretetteljes gondoskodást</strong>, amíg új otthonra talál.</p>
+      <p id="introLongText">A Miskolci Állatsegítő Alapítvány önkéntesei és munkatársai éjt nappallá téve dolgoznak azért, hogy a menhelyi állatoknak <strong>második esélyt</strong> adjanak. Mindez azonban <strong>egyre nagyobb terhet</strong> jelent, és a nyári hónapokban a helyzet különösen súlyossá válik. Adományoddal közvetlenül hozzájárulsz ahhoz, hogy minden befogadott kutya és macska kapjon <strong>élelmet, gyógyellátást és szeretetteljes gondoskodást</strong>, amíg új otthonra talál.</p>
     </div>
   </section>
 </main>
@@ -198,15 +198,21 @@
           </label>
         </div>
 
-        <button type="submit" class="cta-btn submit-btn">ADOMÁNYOZÁS INDÍTÁSA</button>
+        <p id="formError" class="form-error" hidden></p>
+        <button type="submit" class="cta-btn submit-btn" id="formSubmitBtn">ADOMÁNYOZÁS INDÍTÁSA</button>
       </form>
+
+      <div id="donationSuccess" class="donation-success" hidden>
+        <h2 class="section-title">Köszönjük a jelentkezésedet!</h2>
+        <p>Hamarosan felvesszük veled a kapcsolatot a fizetés lebonyolításához. Köszönjük, hogy segítesz!</p>
+      </div>
     </div>
   </section>
 </main>
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <img src="images/logo.png" alt="Miskolci Állatsegítő Alapítvány" class="footer-logo" onerror="this.outerHTML='<span style=&quot;color:#fff;font-weight:800;&quot;>Miskolci Állatsegítő Alapítvány</span>'">
+    <img src="images/logo.png" alt="Miskolci Állatsegítő Alapítvány" class="footer-logo" id="footerLogoImg" onerror="this.outerHTML='<span style=&quot;color:#fff;font-weight:800;&quot;>Miskolci Állatsegítő Alapítvány</span>'">
     <div class="footer-contact">
       <div class="footer-contact-item">
         <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/></svg>
